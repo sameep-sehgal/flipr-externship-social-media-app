@@ -8,13 +8,23 @@ const router = express.Router();
 
 router
     .route('/')
-    .get()
-    .post();
-
+    .get();
 
 router
-    .route('/profile')
-    .get();
+    .route('/signup')
+    .post();
+
+router
+    .route('/login')
+    .post();
+
+router
+    .route('/email_verify')
+    .post();
+
+router
+    .route('/forgot_password')
+    .post();
 
 router
     .route('/:userId')
