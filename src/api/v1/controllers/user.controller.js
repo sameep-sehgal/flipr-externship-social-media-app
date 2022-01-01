@@ -5,6 +5,7 @@ const {
     emailVerifyValidation, 
     forgotPasswordValidation 
 } = require('../validation/user.validation');
+const {sendTestEmail} = require('../services/email.service')
 
 exports.signup = async (req,res) => {
     try {
@@ -32,6 +33,8 @@ exports.signup = async (req,res) => {
             password_hash: password
         });
         await user.save();
+
+        sendTestEmail(user)
 
         res.status(201).json({message: "User successfully registered"});
     }catch(error){
