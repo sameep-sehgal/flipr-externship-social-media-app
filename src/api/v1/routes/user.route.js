@@ -1,35 +1,25 @@
 const express = require('express');
-const validate = require('express-validation');
 const controller = require('../controllers/user.controller');
+
 
 const router = express.Router();
 
 // router.param('userId', controller.load);
 
-router
-    .route('/')
-    .get();
+router.get("/", controller.getUsersList);
 
-router
-    .route('/signup')
-    .post();
+router.post('/signup', controller.signup);
 
-router
-    .route('/login')
-    .post();
+router.post('/login', controller.login);
 
-router
-    .route('/email_verify')
-    .post();
+router.post('/email_verify', controller.emailVerify);
 
-router
-    .route('/forgot_password')
-    .post();
+router.post('/forgot_password', controller.forgotPassword);
 
-router
-    .route('/:userId')
-    .get()
-    .put()
-    .delete();
+router.get('/:userId', controller.getUser);
+
+router.put('/:userId', controller.updateUser);
+
+router.delete('/:userId', controller.deleteUser);
 
 module.exports = router;

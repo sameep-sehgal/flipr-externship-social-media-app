@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs')
 
 const userSchema = mongoose.Schema({
     username: {
@@ -28,5 +29,12 @@ const userSchema = mongoose.Schema({
     timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }  
 });
 
+//Password hashing middleware runs before saving in database
+userSchema.pre('save', async function (next){
+    this.password_hash = await bcrypt.hash(this.password_hash,12)
+    next()
+});
+
 const User = mongoose.model("user", userSchema);
 module.exports = User;
+
